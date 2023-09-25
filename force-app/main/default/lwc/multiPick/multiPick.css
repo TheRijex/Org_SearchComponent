@@ -1,0 +1,21 @@
+.values {
+    border: 1px solid grey;
+    display: none;
+}
+.search {
+    border: black solid 2px;
+    color: black;
+    padding: 5px;
+}
+.container {
+    width: 100%;
+    min-height: 300px;
+    background-color: #fff;
+    border-radius: 5px;
+}
+
+.container_serch_panel {
+ width: 92%;
+ margin-left: 4%;
+ padding-top: 30px;
+}

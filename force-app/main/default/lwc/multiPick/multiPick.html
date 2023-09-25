@@ -1,0 +1,26 @@
+<template>
+    <div class="container">
+        <div class="slds-combobox_container container_serch_panel" onmouseleave={hideOptions}>
+            <input type="text" class="slds-input slds-combobox__input slds-combobox__input-value search" id="combobox-id"
+                        autocomplete="off" aria-controls="listbox-id" role="textbox" placeholder={placeHolder}
+                        onkeyup={handleSearch} onclick={showOptions}></input>   
+            <ul class="values">
+                {selectedValues}
+                <template if:true={selectedItem}>
+                    <!-- <template for:each={listValues} for:item="searchItem">
+                        <div class="searchItem" key={selectedItem.Id}>
+                           {selectedItem.name}
+                        </div>
+                    </template>  -->
+                    <li onclick={handleSelect}>{selectedItem}</li>
+                    <li>Value 1</li>
+                    <li>Value 2</li>
+                    <li>Value 3</li>
+                    <li>Value 4</li>
+                    <li>Value 5</li>
+                </template>
+               
+            </ul>
+        </div>
+    </div>  
+</template>
