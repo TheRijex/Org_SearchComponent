@@ -2,21 +2,17 @@ import { LightningElement, api } from 'lwc';
 import getValues from '@salesforce/apex/MultiSelectController.getValues';
 
 export default class MultiPick extends LightningElement {
-    @api mapOfObjectsAndFields;
+    @api mapOfObjectsAndFields = {"Account":["Name","Id"]};
     @api selectedItem;
     listValues;
     errors;
     placeHolder = 'Input key words';
     selectedValues;
 
-    //connectedCallback() {}
 
-    // renderedCallback() {
-        // this.listValues.forEach(element => {
-        //     //заполнение li или переделать через цикл в template
-        // Account(Name, Id), Contact(FirstName,LastName,Id), Opportunity(Id, Name)
-        // });
-    // }
+    renderedCallback() { 
+        
+    }
 
 
     handleSearch(event) {
@@ -24,8 +20,9 @@ export default class MultiPick extends LightningElement {
        const container = this.template.querySelector('.values');
        container.style = "display:block";
 
-       getValues({searckKeyWords:this.selectedItem, objectsAndFieldForSearch: this.mapOfObjectsAndFields}).then(response => {
+       getValues({searckKeyWords:this.selectedItem, objectsAndFieldForSearch: JSON.stringify(this.mapOfObjectsAndFields)}).then(response => {
             this.listValues = response;
+            console.log(this.listValues[0]);
         }).catch(error => {
             this.errors = error;
             console.log('Error: ' + error.body.message);

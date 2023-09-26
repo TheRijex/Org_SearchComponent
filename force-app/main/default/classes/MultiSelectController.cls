@@ -1,25 +1,25 @@
 public with sharing class MultiSelectController {
 
-
-    public static void getValues(String searckKeyWords, Map<String, Set<String>> objectsAndFieldForSearch) {
+    @AuraEnabled(cacheable = true)
+    public static List<sObject> getValues(String searckKeyWords, String objectsAndFieldForSearch) {
+        Map<String, Set<String>> mapName = (Map<String, Set<String>>) JSON.deserialize(objectsAndFieldForSearch, Map<String, Set<String>>.class);
+        List<sObject> preparedData = new List<sObject>();
         String searchTerm = searckKeyWords;
         String returnValues;
         List<String> returnings = new List<String>();
-        for (String fieldName : objectsAndFieldForSearch.keySet()){
+        for (String fieldName : mapName.keySet()){
             String item1 = fieldName + '(';
-            String mySet_Joined = String.join((Iterable<String>)objectsAndFieldForSearch.get(fieldName), ', ');
+            String mySet_Joined = String.join((Iterable<String>)mapName.get(fieldName), ', ');
             item1 = item1 + mySet_Joined + ')';
             returnings.add(item1);    
         }
         returnValues = String.join(returnings, ', ');
         List<List<sObject>> results = search.query('find :searchTerm in all fields returning ' + returnValues);
         for (Integer i = 0; i < results.size(); i++) {
-            if(results[i].size() != 0) {
-                System.debug('Loop'+ i);
-                System.debug(results[i]);
-            }
+                preparedData.addAll(results[i]);
             
         }
-        // return results;
+        System.debug(preparedData);
+        return preparedData;
     }
 }
