@@ -6,13 +6,11 @@
                         onkeyup={handleSearch} onclick={showOptions}></input>   
             <ul class="values">
                 <template if:true={listValues}>
-                    <ul>
                         <template for:each={listValues} for:item="searchItem">
-                            <li class="searchItem" key={selectedItem.Id}>
-                               {selectedItem.Name}
-                            </li>
+                            <div class="searchItem" key={selectedItem.Id}>
+                               {selectedItem.Id}
+                            </div>
                         </template> 
-                    </ul>
                     
                 </template>
                
