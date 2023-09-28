@@ -1,22 +1,26 @@
 <template>
     <div class="container">
+        <div class="addedIds">
+            {selectedValues}
+        </div>
         <div class="slds-combobox_container container_serch_panel" onmouseleave={hideOptions}>
             <input type="text" class="slds-input slds-combobox__input slds-combobox__input-value search" id="combobox-id"
                         autocomplete="off" aria-controls="listbox-id" role="textbox" placeholder={placeHolder}
                         onkeyup={handleSearch} onclick={showOptions}></input>   
-            <ul class="values">
-                {selectedValues}
+            <div class="values">
                 <template if:true={listValues}>
                         <template for:each={listValues} for:item="searchItem">
-                            <div class="searchItem" key={searchItem.Id} onclick={handleSelect}>
-                               {searchItem.Name.Name}
-                               {searchItem.Name.LastName}
+                            <div class="searchItem" key={searchItem.Id} data-id={searchItem.Name.Id} onclick={handleSelect}>
+                                {searchItem.Name.Name}
+                                {searchItem.Name.LastName}
                             </div>
-                        </template> 
-                    
+                        </template>       
                 </template>
-               
-            </ul>
+
+                <template if:false={listValues}>
+                    No results
+                </template>
+            </div>
         </div>
     </div>  
 </template>

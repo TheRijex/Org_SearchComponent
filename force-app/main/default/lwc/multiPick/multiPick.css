@@ -19,3 +19,7 @@
  margin-left: 4%;
  padding-top: 30px;
 }
+.values {
+    overflow: scroll;
+}
+.values::-webkit-scrollbar { width: 0; }
