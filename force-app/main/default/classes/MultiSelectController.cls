@@ -1,10 +1,10 @@
 public with sharing class MultiSelectController {
 
     @AuraEnabled(cacheable = true)
-    public static List<sObject> getValues(String searckKeyWords, String objectsAndFieldForSearch) {
+    public static List<sObject> getValues(String searchKeyWords, String objectsAndFieldForSearch) {
         Map<String, Set<String>> mapName = (Map<String, Set<String>>) JSON.deserialize(objectsAndFieldForSearch, Map<String, Set<String>>.class);
         List<sObject> preparedData = new List<sObject>();
-        String searchTerm = searckKeyWords;
+        String searchTerm = searchKeyWords;
         String returnValues;
         List<String> returnings = new List<String>();
         for (String fieldName : mapName.keySet()){
@@ -17,7 +17,11 @@ public with sharing class MultiSelectController {
         List<List<sObject>> results = search.query('find :searchTerm in all fields returning ' + returnValues);
         for (Integer i = 0; i < results.size(); i++) {
                 preparedData.addAll(results[i]);
-            
+        }
+        //fix preparedData from Account:{Name=, Id=} to {Object = Account, Name= , Id=}
+        for (sObject record : preparedData) {
+            Schema.SObjectType sObjectType = record.getSObjectType();   //get record type name, Case or Event
+            System.debug(sObjectType);
         }
         System.debug(preparedData);
         return preparedData;

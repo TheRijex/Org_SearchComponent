@@ -10,8 +10,7 @@ export default class MultiPick extends LightningElement {
     selectedValues;
 
 
-    // renderedCallback() { 
-        
+    // renderedCallback() {    
     // }
 
 
@@ -20,8 +19,9 @@ export default class MultiPick extends LightningElement {
        const container = this.template.querySelector('.values');
        container.style = "display:block";
 
-       getValues({searckKeyWords:this.selectedItem, objectsAndFieldForSearch: JSON.stringify(this.mapOfObjectsAndFields)}).then(response => {
-            this.listValues = JSON.stringify(response);
+       getValues({searchKeyWords:this.selectedItem, objectsAndFieldForSearch: JSON.stringify(this.mapOfObjectsAndFields)}).then(response => {
+            //this.listValues = JSON.stringify(response);
+            this.listValues = Object.keys(response).map(key => ({ Id: key, Name: response[key] }));
             console.log(JSON.stringify(this.listValues));
         }).catch(error => {
             this.errors = error;
@@ -30,7 +30,11 @@ export default class MultiPick extends LightningElement {
     }
 
     handleSelect(event) {
-        this.selectedValues = event.target.value;
+        if(!this.selectedValues) {
+            this.selectedValues = event.target.value;
+        } else {
+            this.selectedValues.push(' ,' + event.target.value);
+        }
     }
 
 }
