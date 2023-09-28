@@ -28,7 +28,7 @@ export default class MultiPick extends LightningElement {
         }).catch(error => {
             this.errors = error;
             container.style = "display:none";
-            this.listValues = '';
+            this.listValues = false;
             console.log('Error: ' + error.body.message);
         });
     }
