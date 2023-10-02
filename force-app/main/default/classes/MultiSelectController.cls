@@ -18,7 +18,7 @@ public with sharing class MultiSelectController {
         for (Integer i = 0; i < results.size(); i++) {
                 preparedData.addAll(results[i]);
         }
-        //fix preparedData from Account:{Name=, Id=} to {Object = Account, Name= , Id=}
+        
         for (sObject record : preparedData) {
             Schema.SObjectType sObjectType = record.getSObjectType();   //get record type name, Case or Event
             System.debug(sObjectType);

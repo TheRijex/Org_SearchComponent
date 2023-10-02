@@ -5,8 +5,8 @@ export default class MultiPick extends LightningElement {
     @api mapOfObjectsAndFields = {"Account":["Name","Id"], "Contact":["LastName", "Id"]};
     @api selectedItem;
     @track listValues;
-    @track selectedValues = '';
-    errors;
+    @track selectedValues = [];
+    @track errors;
     placeHolder = 'Input key words';
     
 
@@ -21,22 +21,27 @@ export default class MultiPick extends LightningElement {
        container.style = "display:block";
 
        getValues({searchKeyWords:this.selectedItem, objectsAndFieldForSearch: JSON.stringify(this.mapOfObjectsAndFields)}).then(response => {
-            //this.listValues = JSON.stringify(response);
             this.listValues =''
             this.listValues = Object.keys(response).map(key => ({ Id: key, Name: response[key] }));
-            console.log(JSON.stringify(this.listValues));
+            this.errors = false;
         }).catch(error => {
             this.errors = error;
             container.style = "display:none";
-            this.listValues = false;
             console.log('Error: ' + error.body.message);
         });
     }
 
     handleSelect(event) {
-            this.selectedValues = this.selectedValues +' ' + event.target.dataset.id;
-            //const container = this.template.querySelector('.values');
-            //this.listValues = null;
+        let addIt = true;      
+        this.selectedValues.forEach((element) => {
+            if(element == event.target.dataset.id){
+                addIt = false;
+            }
+        });
+        if(addIt) {
+            this.selectedValues.push(event.target.dataset.id);
+        }
+        addIt = true
     }
 
 }

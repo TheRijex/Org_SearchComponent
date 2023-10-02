@@ -10,15 +10,17 @@
             <div class="values">
                 <template if:true={listValues}>
                         <template for:each={listValues} for:item="searchItem">
-                            <div class="searchItem" key={searchItem.Id} data-id={searchItem.Name.Id} onclick={handleSelect}>
-                                
+                            <div class="searchItem" 
+                            key={searchItem.Id} 
+                            data-id={searchItem.Name.Id} 
+                            onclick={handleSelect}>  
                                 {searchItem.Name.Name}
                                 {searchItem.Name.LastName}
                             </div>
                         </template>       
                 </template>
 
-                <template if:false={listValues}>
+                <template if:true={errors}>
                     No results
                 </template>
             </div>
