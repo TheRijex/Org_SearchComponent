@@ -1,6 +1,7 @@
 .values {
-    border: 1px solid grey;
     display: none;
+    overflow: hidden;
+    background-color: #E5F0FA;
 }
 
 .search {
@@ -23,9 +24,6 @@
  padding-top: 30px;
 }
 
-.values {
-    overflow: scroll;
-}
 .values::-webkit-scrollbar { width: 0; }
 
 .addedIds {
@@ -46,4 +44,18 @@
 
 .selectedItem {
     background-color: grey;
+}
+
+.addedItems {
+    width: 90%;
+    margin: 0 5%;
+    padding: 5px 0;
+    display: flex;
+}
+.item {
+    background-color: #E5F0FA;
+    color: #777777;
+    margin: 0 5px;
+    width: 80px;
+    overflow: hidden;
 }

@@ -8,12 +8,6 @@ export default class MultiPick extends LightningElement {
     @track selectedValues = [];
     @track errors;
     placeHolder = 'Input key words';
-    
-
-
-    // renderedCallback() {    
-    // }
-
 
     handleSearch(event) {
        this.selectedItem = event.target.value;
@@ -41,10 +35,20 @@ export default class MultiPick extends LightningElement {
         if(addIt) {
             this.selectedValues.push(event.target.dataset.id);
         }
-        addIt = true;
+
+        // this.selectedValues.forEach((element) => {
+        //     this.drawingSelectedItems(element);
+        // })
     }
 
     handleSubmit(event) {
         console.log('Package Send');
+        console.log(this.selectedValues);
+    }
+
+    drawingSelectedItems(item) {
+        const selectList = '<div class="item">' + item + '</div>';
+        let container = this.template.querySelector('.addedItems');
+        container.innerHTML =`${selectList}`;
     }
 }
