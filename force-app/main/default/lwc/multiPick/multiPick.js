@@ -41,7 +41,10 @@ export default class MultiPick extends LightningElement {
         if(addIt) {
             this.selectedValues.push(event.target.dataset.id);
         }
-        addIt = true
+        addIt = true;
     }
 
+    handleSubmit(event) {
+        console.log('Package Send');
+    }
 }

@@ -3,7 +3,7 @@
         <div class="addedIds">
             {selectedValues}
         </div>
-        <div class="slds-combobox_container container_serch_panel" onmouseleave={hideOptions}>
+        <div class="slds-combobox_container container_search_panel" onmouseleave={hideOptions}>
             <input type="text" class="slds-input slds-combobox__input slds-combobox__input-value search" id="combobox-id"
                         autocomplete="off" aria-controls="listbox-id" role="textbox" placeholder={placeHolder}
                         onkeyup={handleSearch} onclick={showOptions}></input>   
@@ -24,6 +24,9 @@
                     No results
                 </template>
             </div>
+        </div>
+        <div class="buttonsSet">
+            <button onclick={handleSubmit}>Submit</button>
         </div>
     </div>  
 </template>
