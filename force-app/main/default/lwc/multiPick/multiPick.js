@@ -35,10 +35,6 @@ export default class MultiPick extends LightningElement {
         if(addIt) {
             this.selectedValues.push(event.target.dataset.id);
         }
-
-        // this.selectedValues.forEach((element) => {
-        //     this.drawingSelectedItems(element);
-        // })
     }
 
     handleSubmit(event) {

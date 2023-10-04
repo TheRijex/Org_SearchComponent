@@ -5,12 +5,12 @@
 }
 
 .search {
-    border: black solid 2px;
     color: black;
     padding: 5px;
 }
 
 .container {
+    height: 500px;
     position: relative;
     width: 100%;
     min-height: 300px;
@@ -51,6 +51,7 @@
     margin: 0 5%;
     padding: 5px 0;
     display: flex;
+    flex-wrap: wrap;
 }
 .item {
     background-color: #E5F0FA;
